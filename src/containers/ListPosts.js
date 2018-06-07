@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { getPostsByCategory, getAllPosts } from '../actions/postActions'
 import PostList from './PostList'
 
@@ -36,4 +35,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListPosts))
+export default connect(mapStateToProps, mapDispatchToProps)(ListPosts)
