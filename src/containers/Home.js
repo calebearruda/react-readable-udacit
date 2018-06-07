@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import '../css/App.css'
 import { Layout } from 'antd'
 import SideMenu from './SideMenu'
@@ -43,4 +42,4 @@ function mapStateToProps(state) {
   return {}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
