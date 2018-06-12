@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { connect } from 'react-redux'
 import '../css/App.css'
 import { Layout } from 'antd'
 import SideMenu from './SideMenu'
 import ListPosts from './ListPosts'
+import PostDetail from './PostDetail'
 const { Content, Footer } = Layout
 
 class Home extends Component {
@@ -16,7 +16,8 @@ class Home extends Component {
           <Layout>
             <Content className="margin-content">
               <Route exact path="/" component={ListPosts} />
-              <Route path="/:category" component={ListPosts} />
+              <Route exact path="/:category" render={props => <ListPosts {...props} />} />
+              <Route path="/:category/:post_id" component={PostDetail} />
             </Content>
             <FooterView />
           </Layout>
@@ -34,12 +35,4 @@ const FooterView = () => {
   )
 }
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-function mapStateToProps(state) {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

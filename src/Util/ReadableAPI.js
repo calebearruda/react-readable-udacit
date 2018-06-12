@@ -37,8 +37,8 @@ export const addPost = (post) =>
     })
   }).then(res => res.json())
 
-export const getPostById = (post) =>
-  fetch(`${api}/posts/${post.id}`)
+export const getPostById = (post_id) =>
+  fetch(`${api}/posts/${post_id}`, { headers })
     .then(res => res.json())
 
 /*
@@ -51,7 +51,7 @@ export const voteOnPost = (post, vote) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ option: vote })
+    body: JSON.stringify({ 'option': vote })
   }).then(res => res.json())
 
 export const updatePost = (post) =>
@@ -73,8 +73,8 @@ export const deletePost = (post) =>
     headers: headers
   }).then(res => res.json())
 
-export const getAllCommentsByPost = (post) =>
-  fetch(`${api}/posts/${post.id}/comments`, headers)
+export const getAllCommentsByPost = (post_id) =>
+  fetch(`${api}/posts/${post_id}/comments`, { headers })
     .then(res => res.json())
 
 export const addComment = (comment, parentId) =>

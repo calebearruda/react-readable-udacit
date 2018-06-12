@@ -29,3 +29,26 @@
 .menu-align {
   text-align: left;
 }
+
+.card-posts-main {
+  font-size: 14;
+  color: 'rgba(0, 0, 0, 0.85)';
+  margin-bottom: 16px;
+  font-weight: 50;
+}
+
+.ant-layout-detail {
+  text-align: left;
+}
+
+.tag-post-detail {
+  margin-top: 0.5em !important;
+}
+
+.ant-card-meta-detail {
+  display: inline-flex !important;
+}
+
+.ant-card-meta-description {
+  padding-top: 0.5em !important;
+}

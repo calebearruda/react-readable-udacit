@@ -15,7 +15,6 @@ class SideMenu extends Component {
   }
 
   onCollapse = (collapsed) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   }
 
@@ -33,14 +32,14 @@ class SideMenu extends Component {
           className="fullHeight"
         >
           <img src={book} alt="Readable Logo" className="logo" title="Readable" />
-          <Menu theme={this.state.theme} mode="inline" className="menu-align" >
+          <Menu theme={this.state.theme} mode="inline" className="menu-align" defaultOpenKeys={['categories']} >
             <SubMenu key="categories" title={<span><Icon type="book" /><span>Categories</span></span>}>
               <Menu.Item key="all">
                 <Link to="/">all</Link>
               </Menu.Item>
               {this.props.categories.map((categorie) => (
                 <Menu.Item key={categorie.name}>
-                  <Link to={categorie.name}>
+                  <Link to={`/${categorie.name}`}>
                     {categorie.name}
                   </Link>
                 </Menu.Item>
