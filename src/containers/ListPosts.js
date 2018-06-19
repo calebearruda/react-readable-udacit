@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Radio, Icon } from 'antd'
-import { getPostsByCategory, getAllPosts, orderByPosts } from '../actions/postActions'
-import { updateTypeOfOrderBy } from '../actions/typeOfOrderByActions'
-import PostList from './PostList'
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Radio, Icon } from "antd"
+import { getPostsByCategory, getAllPosts, orderByPosts } from "../actions/postActions"
+import { updateTypeOfOrderBy } from "../actions/typeOfOrderByActions"
+import PostList from "./PostList"
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
 
 class ListPosts extends Component {
   componentDidMount() {
@@ -34,14 +34,14 @@ class ListPosts extends Component {
     }
   }
 
-  onChangeTypeOrderBy = (event) => {
+  onChangeTypeOrderBy = event => {
     this.props.updateTypeOfOrderBy(event.target.value)
   }
 
   render() {
     return (
-      <div style={{ padding: 24, background: '#fff', textAlign: 'left' }}>
-        <Icon type="filter" title="Order By" style={{ marginRight: '2%' }} />
+      <div style={{ padding: 24, background: "#fff", textAlign: "left" }}>
+        <Icon type="filter" title="Order By" style={{ marginRight: "2%" }} />
         <RadioGroup onChange={this.onChangeTypeOrderBy} defaultValue={this.props.typeOrderBy} size="small">
           <RadioButton value="category">Category</RadioButton>
           <RadioButton value="timestamp">Date</RadioButton>
@@ -56,9 +56,9 @@ class ListPosts extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     getPostsByCategory: (category, typeOrderBy) => dispatch(getPostsByCategory(category, typeOrderBy)),
-    getAllPosts: (typeOrderBy) => dispatch(getAllPosts(typeOrderBy)),
-    orderByPosts: (sortBy) => dispatch(orderByPosts(sortBy)),
-    updateTypeOfOrderBy: (typeOrderBy) => dispatch(updateTypeOfOrderBy(typeOrderBy))
+    getAllPosts: typeOrderBy => dispatch(getAllPosts(typeOrderBy)),
+    orderByPosts: sortBy => dispatch(orderByPosts(sortBy)),
+    updateTypeOfOrderBy: typeOrderBy => dispatch(updateTypeOfOrderBy(typeOrderBy))
   }
 }
 
@@ -69,4 +69,7 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPosts)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListPosts)

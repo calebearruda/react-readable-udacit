@@ -1,4 +1,9 @@
-import { POSTS_SET_POSTS, POSTS_ORDER_BY, POSTS_UPDATE_POST_LIST } from '../constants/actionTypes'
+import {
+  POSTS_SET_POSTS,
+  POSTS_ORDER_BY,
+  POSTS_UPDATE_POST_LIST,
+  UPDATE_DELETED_POST
+} from '../constants/actionTypes'
 import _ from 'lodash'
 
 const postReducer = (posts = [], action) => {
@@ -9,10 +14,9 @@ const postReducer = (posts = [], action) => {
       return sortPosts(posts, action.sortBy)
     case POSTS_UPDATE_POST_LIST:
       const { post } = action
-      return sortPosts([
-        ...posts.filter((p) => p.id !== post.id),
-        post
-      ], action.typeOrderBy)
+      return sortPosts([...posts.filter(p => p.id !== post.id), post], action.typeOrderBy)
+    case UPDATE_DELETED_POST:
+      return posts.filter(p => p.id !== action.post.id)
     default:
       return posts
   }

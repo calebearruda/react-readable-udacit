@@ -1,9 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { setAllCategories } from '../actions/categoryActions';
-import { setPosts, updatePostList, setPostSelected } from '../actions/postActions';
-import { setAllComments } from '../actions/commentActions'
-import * as actions from '../constants/actionTypes';
-import * as API from '../util/ReadableAPI';
+import { call, put, takeEvery } from 'redux-saga/effects'
+import { setAllCategories } from '../actions/categoryActions'
+import {
+  setPosts,
+  updatePostList,
+  setPostSelected,
+  updateDeletedPost
+} from '../actions/postActions'
+import { setAllComments, updateDeletedComment, updateCommentList } from '../actions/commentActions'
+import * as actions from '../constants/actionTypes'
+import * as API from '../util/ReadableAPI'
 
 function* fetchCategories(action) {
   const categories = yield call(API.getAllCategories)
@@ -47,6 +52,24 @@ function* fetchAllCommentsByPost(action) {
   yield put(setAllComments(comments))
 }
 
+function* fetchDeletePost(action) {
+  const { post_id } = action
+  const post = yield call(API.deletePost, post_id)
+  yield put(updateDeletedPost(post))
+}
+
+function* fetchDeleteComment(action) {
+  const { comment_id } = action
+  const comment = yield call(API.deleteComment, comment_id)
+  yield put(updateDeletedComment(comment))
+}
+
+function* fetchVoteComment(action) {
+  const { comment_id, option } = action
+  const commentUpdated = yield call(API.voteOnComment, comment_id, option)
+  yield put(updateCommentList(commentUpdated))
+}
+
 export default function* rootSaga() {
   yield takeEvery(actions.CATEGORIES_FETCH_ALL, fetchCategories)
   yield takeEvery(actions.POSTS_ALL, fetchAllPosts)
@@ -55,4 +78,8 @@ export default function* rootSaga() {
   yield takeEvery(actions.POSTS_DOWN_VOTE, fetchDownVotePost)
   yield takeEvery(actions.COMMENTS_GET_ALL_BY_POST, fetchAllCommentsByPost)
   yield takeEvery(actions.LOAD_POST_SELECTED, fetchPostById)
+  yield takeEvery(actions.DELETE_POST, fetchDeletePost)
+  yield takeEvery(actions.COMMENT_DELETE, fetchDeleteComment)
+  yield takeEvery(actions.COMMENT_UP_VOTE, fetchVoteComment)
+  yield takeEvery(actions.COMMENT_DOWN_VOTE, fetchVoteComment)
 }

@@ -7,10 +7,13 @@ import {
   POSTS_DOWN_VOTE,
   POSTS_UPDATE_POST_LIST,
   SET_POST_SELECTED,
-  LOAD_POST_SELECTED
+  LOAD_POST_SELECTED,
+  DELETE_POST,
+  UPDATE_DELETED_POST,
+  POST_CLEAN_POST_SELECTED
 } from '../constants/actionTypes'
 
-export const getAllPosts = (typeOrderBy) => ({
+export const getAllPosts = typeOrderBy => ({
   type: POSTS_ALL,
   typeOrderBy: typeOrderBy
 })
@@ -27,7 +30,7 @@ export const setPosts = (posts, typeOrderBy) => ({
   typeOrderBy: typeOrderBy
 })
 
-export const orderByPosts = (sortBy) => ({
+export const orderByPosts = sortBy => ({
   type: POSTS_ORDER_BY,
   sortBy: sortBy
 })
@@ -52,12 +55,26 @@ export const updatePostList = (post, typeOrderBy) => ({
   typeOrderBy: typeOrderBy
 })
 
-export const setPostSelected = (post) => ({
+export const setPostSelected = post => ({
   type: SET_POST_SELECTED,
   post: post
 })
 
-export const loadPostSelected = (post_id) => ({
+export const loadPostSelected = post_id => ({
   type: LOAD_POST_SELECTED,
   post_id: post_id
+})
+
+export const cleanPostSelected = () => ({
+  type: POST_CLEAN_POST_SELECTED
+})
+
+export const deletePost = post_id => ({
+  type: DELETE_POST,
+  post_id: post_id
+})
+
+export const updateDeletedPost = post => ({
+  type: UPDATE_DELETED_POST,
+  post: post
 })
