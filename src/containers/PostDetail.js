@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Tag } from 'antd'
+import { Card, Tag, Icon } from 'antd'
+import { Link } from 'react-router-dom'
 import {
   upVotePost,
   downVotePost,
   loadPostSelected,
-  cleanPostSelected
+  cleanPostSelected,
+  deletePost
 } from '../actions/postActions'
 import PostVote from '../components/PostVote'
 import ListComments from '../containers/ListComments'
@@ -38,7 +40,16 @@ class PostDetail extends Component {
             post={post}
             upVotePost={this.props.upVotePost}
             downVotePost={this.props.downVotePost}
-          />
+          />,
+          <Link
+            to={{
+              pathname: `${this.props.location.pathname}/edit`,
+              state: { post }
+            }}
+            style={{ color: '#5f5f5f', textDecoration: 'none', marginLeft: 10 }}
+          >
+            <Icon type="edit" title="Edit the post" />
+          </Link>
         ]}
       >
         <Meta
@@ -70,7 +81,8 @@ function mapDispatchToProps(dispatch) {
     upVotePost: (post, typeOrderBy) => dispatch(upVotePost(post, typeOrderBy)),
     downVotePost: (post, typeOrderBy) => dispatch(downVotePost(post, typeOrderBy)),
     loadPostSelected: post_id => dispatch(loadPostSelected(post_id)),
-    cleanPostSelected: () => dispatch(cleanPostSelected())
+    cleanPostSelected: () => dispatch(cleanPostSelected()),
+    deletePost: post_id => dispatch(deletePost(post_id))
   }
 }
 

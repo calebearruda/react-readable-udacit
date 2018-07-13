@@ -14,8 +14,8 @@ class SideMenu extends Component {
     theme: 'dark'
   }
 
-  onCollapse = (collapsed) => {
-    this.setState({ collapsed });
+  onCollapse = collapsed => {
+    this.setState({ collapsed })
   }
 
   componentDidMount() {
@@ -32,16 +32,35 @@ class SideMenu extends Component {
           className="fullHeight"
         >
           <img src={book} alt="Readable Logo" className="logo" title="Readable" />
-          <Menu theme={this.state.theme} mode="inline" className="menu-align" defaultOpenKeys={['categories']} >
-            <SubMenu key="categories" title={<span><Icon type="book" /><span>Categories</span></span>}>
+          <Menu
+            theme={this.state.theme}
+            mode="inline"
+            className="menu-align"
+            defaultOpenKeys={['categories']}
+          >
+            <Menu.Item key="1">
+              <Icon type="plus-circle-o" />
+              <span>
+                <Link to="/new" style={{ color: '#fff', textDecoration: 'none' }}>
+                  Add new Post
+                </Link>
+              </span>
+            </Menu.Item>
+            <SubMenu
+              key="categories"
+              title={
+                <span>
+                  <Icon type="book" />
+                  <span>Categories</span>
+                </span>
+              }
+            >
               <Menu.Item key="all">
                 <Link to="/">all</Link>
               </Menu.Item>
-              {this.props.categories.map((categorie) => (
+              {this.props.categories.map(categorie => (
                 <Menu.Item key={categorie.name}>
-                  <Link to={`/${categorie.name}`}>
-                    {categorie.name}
-                  </Link>
+                  <Link to={`/${categorie.name}`}>{categorie.name}</Link>
                 </Menu.Item>
               ))}
             </SubMenu>
@@ -64,4 +83,7 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideMenu)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideMenu)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
 import PropTypes from 'prop-types'
-// import { withRouter } from 'react-router-dom'
 
 class DeleteButton extends React.Component {
   render() {
@@ -18,10 +17,9 @@ class DeleteButton extends React.Component {
   }
 }
 
-DeleteButton.protpropTypesotype = {
+DeleteButton.propTypes = {
   deleteFunc: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired
 }
 
-// export default withRouter(DeleteButton)
 export default DeleteButton

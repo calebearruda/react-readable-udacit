@@ -70,16 +70,45 @@ function* fetchVoteComment(action) {
   yield put(updateCommentList(commentUpdated))
 }
 
+function* fetchAddPost(action) {
+  const { post, typeOrderBy } = action
+  const newPost = yield call(API.addPost, post)
+  yield put(updatePostList(newPost, typeOrderBy))
+}
+
+function* fetchUpdatePost(action) {
+  const { post, typeOrderBy } = action
+  const updatedPost = yield call(API.updatePost, post)
+  yield put(updatePostList(updatedPost, typeOrderBy))
+  yield put(setPostSelected(updatedPost))
+}
+
+function* fetchAddComment(action) {
+  const { comment } = action
+  const newComment = yield call(API.addComment, comment)
+  yield put(updateCommentList(newComment))
+}
+
+function* fetchUpdateComment(action) {
+  const { comment } = action
+  const updatedComment = yield call(API.updateComment, comment)
+  yield put(updateCommentList(updatedComment))
+}
+
 export default function* rootSaga() {
   yield takeEvery(actions.CATEGORIES_FETCH_ALL, fetchCategories)
   yield takeEvery(actions.POSTS_ALL, fetchAllPosts)
   yield takeEvery(actions.POSTS_ALL_BY_CATEGORY, fetchPostsByCategory)
   yield takeEvery(actions.POSTS_UP_VOTE, fetchUpVotePost)
   yield takeEvery(actions.POSTS_DOWN_VOTE, fetchDownVotePost)
+  yield takeEvery(actions.ADD_POST, fetchAddPost)
+  yield takeEvery(actions.UPDATE_POST, fetchUpdatePost)
   yield takeEvery(actions.COMMENTS_GET_ALL_BY_POST, fetchAllCommentsByPost)
   yield takeEvery(actions.LOAD_POST_SELECTED, fetchPostById)
   yield takeEvery(actions.DELETE_POST, fetchDeletePost)
   yield takeEvery(actions.COMMENT_DELETE, fetchDeleteComment)
   yield takeEvery(actions.COMMENT_UP_VOTE, fetchVoteComment)
   yield takeEvery(actions.COMMENT_DOWN_VOTE, fetchVoteComment)
+  yield takeEvery(actions.COMMENT_ADD, fetchAddComment)
+  yield takeEvery(actions.COMMENT_UPDATE, fetchUpdateComment)
 }

@@ -10,7 +10,9 @@ import {
   LOAD_POST_SELECTED,
   DELETE_POST,
   UPDATE_DELETED_POST,
-  POST_CLEAN_POST_SELECTED
+  POST_CLEAN_POST_SELECTED,
+  ADD_POST,
+  UPDATE_POST
 } from '../constants/actionTypes'
 
 export const getAllPosts = typeOrderBy => ({
@@ -77,4 +79,16 @@ export const deletePost = post_id => ({
 export const updateDeletedPost = post => ({
   type: UPDATE_DELETED_POST,
   post: post
+})
+
+export const addPost = (post, typeOrderBy) => ({
+  type: ADD_POST,
+  post: post,
+  typeOrderBy: typeOrderBy
+})
+
+export const updatePost = (post, typeOrderBy) => ({
+  type: UPDATE_POST,
+  post: post,
+  typeOrderBy: typeOrderBy
 })

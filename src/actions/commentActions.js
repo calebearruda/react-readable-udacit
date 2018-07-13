@@ -5,7 +5,9 @@ import {
   UPDATE_DELETED_COMMENT,
   COMMENT_UP_VOTE,
   COMMENT_DOWN_VOTE,
-  COMMENT_UPDATE_COMMENT_LIST
+  COMMENT_UPDATE_COMMENT_LIST,
+  COMMENT_ADD,
+  COMMENT_UPDATE
 } from '../constants/actionTypes'
 
 export const getAllCommentsByPost = post_id => ({
@@ -42,5 +44,15 @@ export const downVoteComment = comment_id => ({
 
 export const updateCommentList = comment => ({
   type: COMMENT_UPDATE_COMMENT_LIST,
+  comment
+})
+
+export const addComment = comment => ({
+  type: COMMENT_ADD,
+  comment
+})
+
+export const updateComment = comment => ({
+  type: COMMENT_UPDATE,
   comment
 })

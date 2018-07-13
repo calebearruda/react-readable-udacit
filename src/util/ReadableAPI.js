@@ -1,5 +1,5 @@
 import { idGenerate } from './helpers'
-const api = 'http://192.168.25.3:3001'
+const api = 'https://mysterious-sands-59608.herokuapp.com'
 
 let token = localStorage.token
 if (!token) token = localStorage.token = Math.random.toString(36).substr(-8)
@@ -71,7 +71,7 @@ export const deletePost = post_id =>
 export const getAllCommentsByPost = post_id =>
   fetch(`${api}/posts/${post_id}/comments`, { headers }).then(res => res.json())
 
-export const addComment = (comment, parentId) =>
+export const addComment = comment =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
@@ -81,8 +81,7 @@ export const addComment = (comment, parentId) =>
     body: JSON.stringify({
       ...comment,
       timestamp: Date.now(),
-      id: idGenerate(),
-      parentId: parentId
+      id: idGenerate()
     })
   }).then(res => res.json())
 
