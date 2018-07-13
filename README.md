@@ -2,7 +2,7 @@
 
 This is the second project of the course Nanodegree React of Udacity.
 
-You can visit [https://hidden-badlands-40739.herokuapp.com/](ReadbleApp) to view the running.
+You can visit [ReadableAPP](https://hidden-badlands-40739.herokuapp.com/) to view the running.
 
 If you want clone and start the app is very easy to:
 
