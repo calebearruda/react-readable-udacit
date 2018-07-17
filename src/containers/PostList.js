@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { List, Tag } from 'antd'
+import { List, Tag, Icon } from 'antd'
 import { upVotePost, downVotePost, deletePost } from '../actions/postActions'
 import PostVote from '../components/PostVote'
 import PostCommentIcon from '../components/PostCommentIcon'
@@ -42,7 +42,16 @@ class PostList extends Component {
                 typeOrderBy={this.props.typeOrderBy}
               />,
               <PostCommentIcon type="message" text={item.commentCount} />,
-              <DeleteButton id={item.id} deleteFunc={this.props.deletePost} />
+              <Link
+                to={{
+                  pathname: `/${item.category}/${item.id}/edit`,
+                  state: { post: item }
+                }}
+                style={{ color: '#5f5f5f', textDecoration: 'none' }}
+              >
+                <Icon type="edit" title="Edit the post" />
+              </Link>,
+              <DeleteButton id={item.id} deleteFunc={this.props.deletePost} goBack={false} />
             ]}
           >
             <Meta

@@ -80,7 +80,7 @@ class ListComments extends Component {
                     downVoteComment={this.props.downVoteComment}
                   />,
                   <Icon type="edit" onClick={() => this.editingComment(item)} />,
-                  <DeleteButton id={item.id} deleteFunc={this.props.deleteComment} />
+                  <DeleteButton id={item.id} deleteFunc={this.props.deleteComment} goBack={false} />
                 ]}
               >
                 <List.Item.Meta

@@ -11,6 +11,7 @@ import {
 } from '../actions/postActions'
 import PostVote from '../components/PostVote'
 import ListComments from '../containers/ListComments'
+import DeleteButton from '../components/DeleteButton'
 const { Meta } = Card
 
 class PostDetail extends Component {
@@ -21,6 +22,12 @@ class PostDetail extends Component {
 
   componentWillUnmount() {
     this.props.cleanPostSelected()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.post === prevProps.post) {
+      this.props.history.push("/404/no-post-find/sorry")
+    }
   }
 
   render() {
@@ -49,7 +56,13 @@ class PostDetail extends Component {
             style={{ color: '#5f5f5f', textDecoration: 'none', marginLeft: 10 }}
           >
             <Icon type="edit" title="Edit the post" />
-          </Link>
+          </Link>,
+          <DeleteButton
+            id={post.id}
+            deleteFunc={this.props.deletePost}
+            marginLeft={10}
+            goBack={true}
+          />
         ]}
       >
         <Meta
